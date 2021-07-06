@@ -7,6 +7,8 @@ A simple API REST for games developed in .NET Core for the GFT Bootcamp by Digit
 ## What have I learned?
 
 - .NET CLI
+- Open API pattern
+- Swagger
 - C# Interfaces, Class, Inheritance and OOP in general.
 - ... and more about C#
 
