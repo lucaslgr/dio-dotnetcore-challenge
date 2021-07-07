@@ -102,7 +102,7 @@ namespace ApiGames.Services
 
         public async Task Delete(Guid id)
         {
-            var game = _gameRepository.Get(id);
+            var game = await _gameRepository.Get(id);
 
             if (game == null)
                 throw new GameNotRegisteredException();
