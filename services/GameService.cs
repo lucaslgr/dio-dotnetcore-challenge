@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using ApiGames.InputModel;
 using ApiGames.ViewModel;
 using ApiGames.Repositories;
+using ApiGames.Exceptions;
 
 namespace ApiGames.Services
 {
@@ -76,7 +77,7 @@ namespace ApiGames.Services
             var gameEntity = await _gameRepository.Get(id);
 
             if(gameEntity == null)
-                throw new GameNotRegistered();
+                throw new GameNotRegisteredException();
             
             gameEntity.Name = game.Name;
             gameEntity.Producer = game.Producer;
@@ -90,7 +91,7 @@ namespace ApiGames.Services
             var gameEntity = await _gameRepository.Get(id);
 
             if(gameEntity == null)
-                throw new GameNotRegistered();
+                throw new GameNotRegisteredException();
 
             gameEntity.Price = game.Price;
 
@@ -102,7 +103,7 @@ namespace ApiGames.Services
             var game = _gameRepository.Get(id);
 
             if(game == null)
-                throw new GameNotRegistered();
+                throw new GameNotRegisteredException();
             
             await _gameRepository.Delete(id);
         }
