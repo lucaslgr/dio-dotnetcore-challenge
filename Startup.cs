@@ -13,6 +13,8 @@ using Microsoft.Extensions.Logging;
 using ApiGames.Services;
 using ApiGames.Repositories;
 using ApiGames.Controllers.V1;
+using System.Reflection;
+using System.IO;
 
 namespace ApiGames
 {
@@ -42,7 +44,13 @@ namespace ApiGames
             services.AddControllers();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(c => 
+            {
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
