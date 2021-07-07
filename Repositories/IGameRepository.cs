@@ -5,7 +5,7 @@ using ApiGames.Entities;
 
 namespace ApiGames.Repositories
 {
-    public interface IGameRepository
+    public interface IGameRepository : IDisposable
     {
         Task<List<Game>> Get(int page, int quantity);
 
