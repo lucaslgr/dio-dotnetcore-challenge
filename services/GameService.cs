@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ApiGames.InputModel;
@@ -24,7 +25,7 @@ namespace ApiGames.Services
 
             return games.Select(game => new GameViewModel
             {
-                Id = game.id,
+                Id = game.Id,
                 Name = game.Name,
                 Producer = game.Producer,
                 Price = game.Price
