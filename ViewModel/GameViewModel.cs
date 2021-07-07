@@ -1,3 +1,5 @@
+using System;
+
 namespace ApiGames.ViewModel
 {
     public class GameViewModel
