@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ApiGames.InputModel;
 using ApiGames.ViewModel;
+using ApiGames.Repositories;
 
 namespace ApiGames.Services
 {
