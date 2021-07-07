@@ -5,6 +5,7 @@ using ApiGames.InputModel;
 using ApiGames.ViewModel;
 using ApiGames.Repositories;
 using ApiGames.Exceptions;
+using ApiGames.Entities;
 
 namespace ApiGames.Services
 {
@@ -34,12 +35,12 @@ namespace ApiGames.Services
         {
             var game = await _gameRepository.Get(id);
 
-            if(game == null)
+            if (game == null)
                 return null;
 
             return new GameViewModel
             {
-                Id = game.id,
+                Id = game.Id,
                 Name = game.Name,
                 Producer = game.Producer,
                 Price = game.Price
@@ -50,15 +51,15 @@ namespace ApiGames.Services
         {
             var gameEntity = await _gameRepository.Get(game.Name, game.Producer);
 
-            if(gameEntity.Count > 0)
+            if (gameEntity.Count > 0)
                 throw new GameIsAlreadyRegisteredException();
-            
+
             var gameInsert = new Game
             {
                 Id = Guid.NewGuid(),
-                Name = game.Name;
-                Producer = game.Producer;
-                Price = game.Price;
+                Name = game.Name,
+                Producer = game.Producer,
+                Price = game.Price,
             };
 
             await _gameRepository.Insert(gameInsert);
@@ -66,9 +67,9 @@ namespace ApiGames.Services
             return new GameViewModel
             {
                 Id = gameInsert.Id,
-                Name = gameInsert.Name;
-                Producer = gameInsert.Producer;
-                Price = gameInsert.Price;
+                Name = gameInsert.Name,
+                Producer = gameInsert.Producer,
+                Price = gameInsert.Price
             };
         }
 
@@ -76,9 +77,9 @@ namespace ApiGames.Services
         {
             var gameEntity = await _gameRepository.Get(id);
 
-            if(gameEntity == null)
+            if (gameEntity == null)
                 throw new GameNotRegisteredException();
-            
+
             gameEntity.Name = game.Name;
             gameEntity.Producer = game.Producer;
             gameEntity.Price = game.Price;
@@ -90,21 +91,21 @@ namespace ApiGames.Services
         {
             var gameEntity = await _gameRepository.Get(id);
 
-            if(gameEntity == null)
+            if (gameEntity == null)
                 throw new GameNotRegisteredException();
 
-            gameEntity.Price = game.Price;
+            gameEntity.Price = price;
 
             await _gameRepository.Update(gameEntity);
         }
-        
+
         public async Task Delete(Guid id)
         {
             var game = _gameRepository.Get(id);
 
-            if(game == null)
+            if (game == null)
                 throw new GameNotRegisteredException();
-            
+
             await _gameRepository.Delete(id);
         }
 
@@ -112,4 +113,5 @@ namespace ApiGames.Services
         {
             _gameRepository?.Dispose();
         }
+    }
 }
