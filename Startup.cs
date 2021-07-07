@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ApiGames.Services;
 using ApiGames.Repositories;
+using ApiGames.Controllers.V1;
 
 namespace ApiGames
 {
@@ -29,6 +30,14 @@ namespace ApiGames
         {
             services.AddScoped<IGameService, GameService>();
             services.AddScoped<IGameRepository, GameSqlServerRepository>();
+
+            #region LifeCycle
+
+            services.AddSingleton<IExampleSingleton, ExampleLifeCycle>();
+            services.AddScoped<IExampleScoped, ExampleLifeCycle>();
+            services.AddTransient<IExampleTransient, ExampleLifeCycle>();
+
+            #endregion
 
             services.AddControllers();
 
