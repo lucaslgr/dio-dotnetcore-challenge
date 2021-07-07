@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ApiGames.Entities;
@@ -9,11 +10,11 @@ namespace ApiGames.Repositories
     {   
         private static Dictionary<Guid, Game> games = new Dictionary<Guid, Game>()
         {
-            { Guid.Parse("a1"), new Game {Id = Guid.Parse("a1"), Name = "Super Metoid", Producer = "Nintendo", Price = 200} },
-            { Guid.Parse("b1"), new Game {Id = Guid.Parse("b1"), Name = "Aladin", Producer = "Nintendo", Price = 100} },
-            { Guid.Parse("c1"), new Game {Id = Guid.Parse("c1"), Name = "Donkey Kong", Producer = "Nintendo", Price = 120} },
-            { Guid.Parse("d1"), new Game {Id = Guid.Parse("d1"), Name = "Street Fighter V", Producer = "Capcom", Price = 120} },
-            { Guid.Parse("e1"), new Game {Id = Guid.Parse("e1"), Name = "Residente Evil", Producer = "Capcom", Price = 120} }
+            { Guid.Parse("0ca314a5-9282-45d8-92c3-2985f2a9fd04"), new Game {Id = Guid.Parse("0ca314a5-9282-45d8-92c3-2985f2a9fd04"), Name = "Super Metoid", Producer = "Nintendo", Price = 200} },
+            { Guid.Parse("eb909ced-1862-4789-8641-1bba36c23db3"), new Game {Id = Guid.Parse("eb909ced-1862-4789-8641-1bba36c23db3"), Name = "Aladin", Producer = "Nintendo", Price = 100} },
+            { Guid.Parse("5e99c84a-108b-4dfa-ab7e-d8c55957a7ec"), new Game {Id = Guid.Parse("5e99c84a-108b-4dfa-ab7e-d8c55957a7ec"), Name = "Donkey Kong", Producer = "Nintendo", Price = 120} },
+            { Guid.Parse("da033439-f352-4539-879f-515759312d53"), new Game {Id = Guid.Parse("da033439-f352-4539-879f-515759312d53"), Name = "Street Fighter V", Producer = "Capcom", Price = 120} },
+            { Guid.Parse("92576bd2-388e-4f5d-96c1-8bfda6c5a268"), new Game {Id = Guid.Parse("92576bd2-388e-4f5d-96c1-8bfda6c5a268"), Name = "Residente Evil", Producer = "Capcom", Price = 120} }
         };
 
         public Task<List<Game>> Get(int page, int quantity)
@@ -23,8 +24,8 @@ namespace ApiGames.Repositories
 
         public Task<Game> Get(Guid id)
         {
-            if(!games.ContainKey(id))
-                return null;
+            if(!games.ContainsKey(id))
+                return Task.FromResult<Game>(null);
             return Task.FromResult(games[id]);
         }
 
